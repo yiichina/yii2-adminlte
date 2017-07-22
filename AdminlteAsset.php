@@ -9,12 +9,13 @@ use yii\web\AssetBundle;
  */
 class AdminlteAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/adminlte/dist';
+    public $sourcePath = '@vendor/adminlte/dist';
     public $css = [
         'css/AdminLTE.min.css',
+        'css/skins/skin-blue.min.css',
     ];
     public $js = [
-        'js/app.min.js',
+        'js/adminlte.min.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
