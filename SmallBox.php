@@ -2,7 +2,7 @@
 namespace yiichina\adminlte;
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;
-class Box extends Widget
+class SmallBox extends Widget
 {
     
     const TYPE_INFO = 'info';
