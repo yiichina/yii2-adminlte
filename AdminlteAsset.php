@@ -18,7 +18,8 @@ class AdminlteAsset extends AssetBundle
         'js/app.min.js',
     ];
     public $depends = [
-        'yii\web\JqueryAsset',
         'yii\bootstrap\BootstrapAsset',
+        'yii\bootstrap\BootstrapPluginAsset',
+        'yiichina\icons\IconAsset',
     ];
 }
