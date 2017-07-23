@@ -28,6 +28,8 @@ class Box extends Widget
      * @var boolean $withBorder add border after box header
      */
     public $withBorder = true;
+
+    public $noPadding = false;
     
     /**
      * @var string
@@ -67,7 +69,7 @@ class Box extends Widget
         
         echo Html::beginTag("div", $this->options);
         echo $this->renderHeader();
-        echo Html::beginTag("div", ["class" => "box-body"]);
+        echo Html::beginTag("div", ["class" => "box-body" . ($this->noPadding ? ' no-padding' : null)]);
     }
     
     public function run()
