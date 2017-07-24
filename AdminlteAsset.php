@@ -21,5 +21,7 @@ class AdminlteAsset extends AssetBundle
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
         'yiichina\icons\IconAsset',
+		'backend\assets\CheckAsset',
+		'backend\assets\SelectAsset',
     ];
 }
