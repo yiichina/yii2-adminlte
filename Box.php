@@ -2,6 +2,7 @@
 namespace yiichina\adminlte;
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;
+use yiichina\icons\Icon;
 class Box extends Widget
 {
     
@@ -15,6 +16,7 @@ class Box extends Widget
     const TOOL_COLLAPSE = 'collapse';
     const TOOL_REMOVE = 'remove';
     const TOOL_REFRESH = 'refresh';
+    const TOOL_SEARCH = 'search';
     
     /**
      * @var string $type color style of widget*
@@ -49,8 +51,10 @@ class Box extends Widget
      * @var bool whether collapsed the box body
      */
     public $collapsed = false;
+
+    public $search = true;
     
-    protected $sysTools = [self::TOOL_COLLAPSE, self::TOOL_REMOVE];
+    protected $sysTools = [self::TOOL_COLLAPSE, self::TOOL_REMOVE, self::TOOL_SEARCH];
     
     public function init()
     {
@@ -100,7 +104,8 @@ class Box extends Widget
         }
         $html .= Html::beginTag("div", $headerOption);
         $html .= Html::tag("h3", $this->title, ["class"=>"box-title"]);
-        $html .= $tools ? Html::tag("div", $tools, ["class"=>"box-tools pull-right"]) : null;
+        $html .= $this->search ? Html::a(Icon::show('search-plus', 'fa') . '高级搜索', 'javascript:void(0);', ['class' => 'btn btn-sm btn-flat btn-primary btn-search pull-right']) : null;
+        //$html .= $tools ? Html::tag("div", $tools, ["class"=>"box-tools pull-right"]) : null;
         $html .= Html::endTag("div");
         return $html;
     }
@@ -111,6 +116,12 @@ class Box extends Widget
             return Html::tag("div", $this->footer, ["class" => "box-footer"]);
         }
         return '';
+    }
+
+    protected function search()
+    {
+        $icon = Html::tag("i", "", ["class" => "fa fa-search-plus"]);
+        return Html::tag("button", $icon, ["class" => "btn btn-box-tool", "data-widget" => "search"]);
     }
     
     protected function collapse()
