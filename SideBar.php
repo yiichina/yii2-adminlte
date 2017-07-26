@@ -7,6 +7,12 @@ use yii\helpers\Url;
 
 class Sidebar extends \yii\widgets\Menu
 {
+	public $defaultRight = false;
+
+	public $labelTemplate = '{icon}{label}';
+
+	public $linkTemplate = '<a href="{url}">{icon}{label}{right}</a>';
+
     public $submenuTemplate = "\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n";
     
     public $options = ['class' => 'sidebar-menu tree', 'data' => ['widget' => 'tree']];
@@ -37,7 +43,7 @@ class Sidebar extends \yii\widgets\Menu
 
             $menu = $this->renderItem($item);
             if (!empty($item['items'])) {
-                $options['class'] = 'treeview';
+                $class[] = 'treeview';
                 $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
                 $menu .= strtr($submenuTemplate, [
                     '{items}' => $this->renderItems($item['items']),
@@ -48,5 +54,32 @@ class Sidebar extends \yii\widgets\Menu
         }
 
         return implode("\n", $lines);
+    }
+
+	/**
+     * Renders the content of a menu item.
+     * Note that the container and the sub-menus are not rendered here.
+     * @param array $item the menu item to be rendered. Please refer to [[items]] to see what data might be in the item.
+     * @return string the rendering result
+     */
+    protected function renderItem($item)
+    {
+        if (isset($item['url'])) {
+            $template = ArrayHelper::getValue($item, 'template', $this->linkTemplate);
+
+            return strtr($template, [
+                '{url}' => Url::to($item['url']),
+                '{label}' => Html::tag('span', $item['label']),
+				'{icon}' => $item['icon'] ?? null,
+				'{right}' => empty($item['items']) ? null : Html::tag('span', ArrayHelper::getValue($item, 'right', $this->defaultRight), ['class' => 'pull-right-container']),
+            ]);
+        } else {
+            $template = ArrayHelper::getValue($item, 'template', $this->labelTemplate);
+
+            return strtr($template, [
+                '{label}' => $item['label'],
+				'{icon}' => $item['icon'] ?? null,
+            ]);
+        }
     }
 }
