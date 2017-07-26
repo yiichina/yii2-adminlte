@@ -1,72 +1,57 @@
 <?php
 namespace yiichina\adminlte;
 
+use Yii;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\Html;
+use yii\bootstrap\BootstrapPluginAsset;
 
 class NavBar extends \yii\bootstrap\NavBar
 {
-    public $items = [];
-
-    public $navOptions = [];
+    public $brandLabelMini = false;
     
-    public $brandLabelSm = false;
-    
+    /**
+     * Initializes the widget.
+     */
     public function init()
     {
-        echo Html::beginTag("header", ["class"=>"main-header"]);
-        echo $this->renderBrand();
-        if (empty($this->options['class'])) {
-            Html::addCssClass($this->options, ['navbar', 'navbar-static-top']);
+        $this->clientOptions = false;
+        echo Html::beginTag('header', ['class' => 'main-header']);
+
+        if ($this->brandLabel !== false) {
+            Html::addCssClass($this->brandOptions, ['widget' => 'logo']);
+            echo Html::a(Html::tag('span', $this->brandLabelMini ?: $this->brandLabel, ['class' => 'logo-mini']) . Html::tag('span', $this->brandLabel, ['class' => 'logo-lg']), $this->brandUrl === false ? Yii::$app->homeUrl : $this->brandUrl, $this->brandOptions);
         }
-        if (empty($this->options['role'])) {
-            $this->options['role'] = 'navigation';
+
+        $options = $this->options;
+        if (empty($options['class'])) {
+            Html::addCssClass($options, ['navbar', 'navbar-static-top']);
         }
-        echo Html::beginTag("nav", $this->options);
+        $tag = ArrayHelper::remove($options, 'tag', 'nav');
+        echo Html::beginTag($tag, $options);
         echo $this->renderToggleButton();
-        echo Html::beginTag("div", ["class"=>"navbar-custom-menu"]);
-        if ($this->items) {
-            echo $this->renderItems();
-        }
+        echo Html::beginTag('div', ['class' => 'navbar-custom-menu']);
     }
     
     public function run()
     {
-        echo Html::endTag("div");
-        echo Html::endTag("nav");
-        echo Html::endTag("header");
-    }
-    
-    protected function renderBrand()
-    {
-        if ($this->brandLabel === false) {
-            return null;
-        }
-        $label = '';
-        $label .= Html::tag("span",$this->brandLabel, ["class" => "logo-lg"]);
-        $label .= Html::tag("span",$this->brandLabelSm, ["class" => "logo-sm"]);
-        return Html::a($label, $this->brandUrl, ["class" => "logo"]);
+        echo Html::endTag('div');
+        $tag = ArrayHelper::remove($this->options, 'tag', 'nav');
+        echo Html::endTag($tag);
+        echo Html::endTag('header');
+        BootstrapPluginAsset::register($this->getView());
     }
     
     protected function renderToggleButton()
     {
-        return Html::tag("a",
-            Html::tag("span", "Toggle navigation", ["class"=>"sr-only"]),
-            [
-                "href" => "#",
-                "class" => "sidebar-toggle",
-                "data-toggle" => "offcanvas",
-                "role" => "button"
-            ]
-        );
-    }
-    
-    protected function renderItems()
-    {
-        Html::addCssClass($this->navOptions, "navbar-nav");
-        return Nav::widget([
-            'items' => $this->items,
-            'options' => $this->navOptions,
-            'activateParents' => true,
+        $bar = Html::tag('span', '', ['class' => 'icon-bar']);
+        $screenReader = "<span class=\"sr-only\">{$this->screenReaderToggleText}</span>";
+
+        return Html::a(Html::tag('span', 'Toggle navigation', ['class' => 'sr-only']), '#', [
+            'class' => 'sidebar-toggle',
+            "data-toggle" => "offcanvas",
+            //'data-toggle' => 'push-menu',
+            'role' => 'button',
         ]);
     }
 }
