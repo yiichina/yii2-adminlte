@@ -1,138 +1,62 @@
 <?php
+
 namespace yiichina\adminlte;
+
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;
-use yiichina\icons\Icon;
+
 class Box extends Widget
 {
-    
-    const TYPE_INFO = 'info';
-    const TYPE_PRIMARY = 'primary';
-    const TYPE_SUCCESS = 'success';
-    const TYPE_DEFAULT = 'default';
-    const TYPE_DANGER = 'danger';
-    const TYPE_WARNING = 'warning';
-    
-    const TOOL_COLLAPSE = 'collapse';
-    const TOOL_REMOVE = 'remove';
-    const TOOL_REFRESH = 'refresh';
-    const TOOL_SEARCH = 'search';
-    
-    /**
-     * @var string $type color style of widget*
-     */
-    public $type = self::TYPE_DEFAULT;
-    /**
-     * @var boolean $solid is solid box header*
-     */
-    public $solid = false;
-    /**
-     * @var boolean $withBorder add border after box header
-     */
-    public $withBorder = true;
+    public $title;
 
-    public $noPadding = false;
+    public $tools = false;
     
-    /**
-     * @var string
-     */
-    public $title = '';
-    
-    /**
-     * the item can be a html or (remove, collapse)
-     * @var array
-     */
-    public $tools = [];
-    
-    public $footer = '';
-    
-    /**
-     * 
-     * @var bool whether collapsed the box body
-     */
-    public $collapsed = false;
+    public $footer = false;
 
-    public $search = true;
-    
-    protected $sysTools = [self::TOOL_COLLAPSE, self::TOOL_REMOVE, self::TOOL_SEARCH];
+    public $headerOptions = [];
+
+    public $toolsOptions = [];
+
+    public $footerOptions = [];
     
     public function init()
     {
         Html::addCssClass($this->options,'box');
-        Html::addCssClass($this->options,'box-' . $this->type);
-        $this->options['id'] = !empty($this->options['id']) ? $this->options['id'] : $this->getId();
-        if($this->solid){
-            Html::addCssClass($this->options,'box-solid');
-        }
-        if ($this->collapsed) {
-            Html::addCssClass($this->options,'collapsed-box');
-            if (!in_array(self::TOOL_COLLAPSE, $this->tools)) {
-                array_unshift($this->tools, self::TOOL_COLLAPSE);
-            }
-        }
-        
-        echo Html::beginTag("div", $this->options);
+        echo Html::beginTag('div', $this->options);
         echo $this->renderHeader();
-        echo Html::beginTag("div", ["class" => "box-body" . ($this->noPadding ? ' no-padding' : null)]);
+        echo Html::beginTag('div', ['class' => 'box-body']);
     }
     
     public function run()
     {
-        echo Html::endTag("div");
+        echo Html::endTag('div');
         echo $this->renderFooter();
-        echo Html::endTag("div");
+        echo Html::endTag('div');
     }
     
     protected function renderHeader()
     {
-        $tools = '';
-        foreach ($this->tools as $v) {
-            if (in_array($v, $this->sysTools)) {
-                $tools .= $this->$v();
-            } else {
-                $tools .= $v;
-            }
-        }
-        if (!$this->title && !$tools) {
-            return '';
-        }
-        $html = '';
-        $headerOption = ["class" => "box-header"];
-        $this->title = $this->title ? $this->title : ' ';
-        if ($this->withBorder) {
-            Html::addCssClass($headerOption, "with-border");
-        }
-        $html .= Html::beginTag("div", $headerOption);
-        $html .= Html::tag("h3", $this->title, ["class"=>"box-title"]);
-        $html .= $this->search ? Html::a(Icon::show('search-plus', 'fa') . '高级搜索', 'javascript:void(0);', ['class' => 'btn btn-sm btn-flat btn-primary btn-search pull-right']) : null;
-        //$html .= $tools ? Html::tag("div", $tools, ["class"=>"box-tools pull-right"]) : null;
-        $html .= Html::endTag("div");
-        return $html;
-    }
-    
-    protected function renderFooter()
-    {
-        if ($this->footer) {
-            return Html::tag("div", $this->footer, ["class" => "box-footer"]);
-        }
-        return '';
+        Html::addCssClass($headerOption, 'box-header');
+        return Html::tag('div', Html::tag('h3', $this->title, ['class' => 'box-title']) . $this->renderTools(), $headerOption);
     }
 
-    protected function search()
+    protected function renderFooter()
     {
-        $icon = Html::tag("i", "", ["class" => "fa fa-search-plus"]);
-        return Html::tag("button", $icon, ["class" => "btn btn-box-tool", "data-widget" => "search"]);
+        if($this->footer !== false) {
+            Html::addCssClass($this->footerOptions,'box-footer');
+            return Html::tag('div', $this->footer, $this->footerOptions);
+        }
+        return null;
     }
-    
-    protected function collapse()
+
+    protected function renderTools()
     {
-        $icon = Html::tag("i", "", ["class" => "fa fa-" . ($this->collapsed ? "plus" : "minus")]);
-        return Html::tag("button", $icon, ["class" => "btn btn-box-tool", "data-widget" => "collapse"]);
+        if($this->tools !== false) {
+            Html::addCssClass($this->toolsOptions,'box-tools pull-right');
+            return Html::tag("div", $this->tools, $this->toolsOptions);
+        }
+        return null;
     }
-    
-    protected function remove()
-    {
-        $icon = Html::tag("i", "", ["class" => "fa fa-times"]);
-        return Html::tag("button", $icon, ["class" => "btn btn-box-tool", "data-widget" => "remove"]);
-    }
+
+
 }
