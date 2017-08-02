@@ -13,6 +13,8 @@ class Box extends Widget
     
     public $footer = false;
 
+    public $withBorder = true;
+
     public $headerOptions = [];
 
     public $toolsOptions = [];
@@ -37,6 +39,9 @@ class Box extends Widget
     protected function renderHeader()
     {
         Html::addCssClass($headerOption, 'box-header');
+        if($this->withBorder) {
+            Html::addCssClass($headerOption, 'with-border');
+        }
         return Html::tag('div', Html::tag('h3', $this->title, ['class' => 'box-title']) . $this->renderTools(), $headerOption);
     }
 
