@@ -4,7 +4,7 @@
 /* @var $content string */
 
 use yii\helpers\Html;
-use backend\assets\AppAsset;
+use yiichina\adminlte\assets\AdminlteAsset;
 use yiichina\adminlte\Nav;
 use yiichina\adminlte\NavBar;
 use yiichina\adminlte\SideBar;
@@ -13,7 +13,7 @@ use yii\widgets\Breadcrumbs;
 use yii\widgets\Menu;
 use common\models\Node;
 
-AppAsset::register($this);
+AdminlteAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

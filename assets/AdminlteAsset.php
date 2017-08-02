@@ -20,8 +20,5 @@ class AdminlteAsset extends AssetBundle
     public $depends = [
         'yii\bootstrap\BootstrapAsset',
         'yii\bootstrap\BootstrapPluginAsset',
-        'yiichina\icons\IconAsset',
-		'backend\assets\CheckAsset',
-		'backend\assets\SelectAsset',
     ];
 }
