@@ -1,11 +1,11 @@
 <?php
 
-namespace yiichina\adminlte\widgets;
+namespace yiichina\adminlte;
 
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;
 
-class InfoBox extends Widget
+class SmallBox extends Widget
 {
     public $footer = false;
 
