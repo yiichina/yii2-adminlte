@@ -1,6 +1,6 @@
 <?php
 
-namespace yiichina\adminlte;
+namespace yiichina\adminlte\assets;
 
 use yii\web\AssetBundle;
 

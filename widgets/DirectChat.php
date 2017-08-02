@@ -1,6 +1,6 @@
 <?php
 
-namespace yiichina\adminlte;
+namespace yiichina\adminlte\widgets;
 
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;

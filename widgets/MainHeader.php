@@ -1,12 +1,12 @@
 <?php
-namespace yiichina\adminlte;
+namespace yiichina\adminlte\widgets;
 
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\Html;
 use yii\bootstrap\BootstrapPluginAsset;
 
-class NavBar extends \yii\bootstrap\NavBar
+class MainHeader extends \yii\bootstrap\NavBar
 {
     public $brandLabelMini = false;
     

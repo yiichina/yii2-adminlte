@@ -1,5 +1,5 @@
 <?php
-namespace common\widgets;
+namespace yiichina\adminlte\widgets;
 
 use Yii;
 

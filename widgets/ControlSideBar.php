@@ -1,11 +1,11 @@
 <?php
-namespace yiichina\adminlte;
+namespace yiichina\adminlte\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\Html;
 use yii\helpers\Url;
 
-class Sidebar extends \yii\widgets\Menu
+class ControllerSidebar extends \yii\widgets\Menu
 {
 	public $defaultRight = false;
 

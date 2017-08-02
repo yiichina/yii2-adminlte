@@ -1,5 +1,5 @@
 <?php
-namespace yiichina\adminlte;
+namespace yiichina\adminlte\widgets;
 
 use yii\bootstrap\Html;
 use yii\helpers\ArrayHelper;
