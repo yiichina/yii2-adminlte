@@ -9,16 +9,15 @@ use yii\web\AssetBundle;
  */
 class AdminlteAsset extends AssetBundle
 {
-    public $sourcePath = '@bower/adminlte/dist';
+    public $sourcePath = '@vendor/almasaeed2010/adminlte/dist';
     public $css = [
         'css/AdminLTE.min.css',
         'css/skins/skin-blue.min.css',
     ];
     public $js = [
-        'js/app.min.js',
+        'js/adminlte.min.js',
     ];
     public $depends = [
         'yii\bootstrap\BootstrapAsset',
-        'yii\bootstrap\BootstrapPluginAsset',
     ];
 }
