@@ -10,7 +10,7 @@
             "email": "admin@yiichina.com"
         }
     ],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "require": {
         "yiisoft/yii2-bootstrap": "~2.0.0",
         "almasaeed2010/adminlte": "~2.4@RC"
