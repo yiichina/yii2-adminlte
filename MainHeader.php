@@ -49,8 +49,7 @@ class MainHeader extends \yii\bootstrap\NavBar
 
         return Html::a(Html::tag('span', 'Toggle navigation', ['class' => 'sr-only']), '#', [
             'class' => 'sidebar-toggle',
-            "data-toggle" => "offcanvas",
-            //'data-toggle' => 'push-menu',
+            'data-toggle' => 'push-menu',
             'role' => 'button',
         ]);
     }

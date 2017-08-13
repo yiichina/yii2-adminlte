@@ -3,7 +3,7 @@ namespace yiichina\adminlte;
 
 use Yii;
 
-class Alert extends \yii\bootstrap\Widget
+class Callout extends \yii\bootstrap\Widget
 {
     public $alertTypes = [
         'error' => [
