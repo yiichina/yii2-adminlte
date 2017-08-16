@@ -28,5 +28,6 @@ or add
 to the require section of your `composer.json` file.
 
 
-Usage & Document
+## Usage & Document
+
 http://extension.yiichina.com/index.php?r=admin-lte
