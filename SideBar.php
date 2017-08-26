@@ -15,7 +15,7 @@ class Sidebar extends \yii\widgets\Menu
 
     public $submenuTemplate = "\n<ul class=\"treeview-menu\">\n{items}\n</ul>\n";
     
-    public $options = ['class' => 'sidebar-menu tree', 'data' => ['widget' => 'tree']];
+    public $options = ['class' => 'sidebar-menu', 'data' => ['widget' => 'tree']];
     
     public function init()
     {
@@ -44,6 +44,9 @@ class Sidebar extends \yii\widgets\Menu
             $menu = $this->renderItem($item);
             if (!empty($item['items'])) {
                 $class[] = 'treeview';
+                if($item['active']) {
+                    $class[] = 'menu-open';
+                }
                 $submenuTemplate = ArrayHelper::getValue($item, 'submenuTemplate', $this->submenuTemplate);
                 $menu .= strtr($submenuTemplate, [
                     '{items}' => $this->renderItems($item['items']),

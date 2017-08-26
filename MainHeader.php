@@ -44,9 +44,6 @@ class MainHeader extends \yii\bootstrap\NavBar
     
     protected function renderToggleButton()
     {
-        $bar = Html::tag('span', '', ['class' => 'icon-bar']);
-        $screenReader = "<span class=\"sr-only\">{$this->screenReaderToggleText}</span>";
-
         return Html::a(Html::tag('span', 'Toggle navigation', ['class' => 'sr-only']), '#', [
             'class' => 'sidebar-toggle',
             'data-toggle' => 'push-menu',
