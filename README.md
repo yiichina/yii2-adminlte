@@ -30,4 +30,4 @@ to the require section of your `composer.json` file.
 
 ## Usage & Document
 
-http://extension.yiichina.com/index.php?r=admin-lte
+http://extension.yiichina.com/admin-lte
