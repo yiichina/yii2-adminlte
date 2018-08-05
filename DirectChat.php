@@ -5,7 +5,7 @@ namespace yiichina\adminlte;
 use yii\bootstrap\Widget;
 use yii\bootstrap\Html;
 
-class SmallBox extends Widget
+class DirectChat extends Widget
 {
     public $footer = false;
 
