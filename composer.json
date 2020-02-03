@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "yiisoft/yii2-bootstrap4": "~1.0.0@dev",
+        "yiisoft/yii2-bootstrap4": "*",
         "bower-asset/adminlte": "~3.0.0@alpha"
     },
     "autoload": {
